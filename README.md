@@ -1,5 +1,6 @@
 # EventManager_Maria_Marinova - ASP.NET Core MVC Web Application
 The project was made using Visual Studio 2017
+
 Setup Guide
 1. Open the project with Visual Studio 2017
 
