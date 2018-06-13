@@ -59,7 +59,7 @@ namespace EventManager.Web.Controllers
 
         }
 
-        
+        [Authorize]
         public async Task<IActionResult> Edit(long id)
         {
             var eventItem = await this.eventService.FindById(id);
@@ -82,6 +82,7 @@ namespace EventManager.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Edit(long id,EventFormModel model)
         {
             if (!ModelState.IsValid)
@@ -89,7 +90,9 @@ namespace EventManager.Web.Controllers
                 return View(model);
             }
 
-            var successEdited = await this.eventService.Edit(id, model.Name,model.Location, model.Start, model.End);
+            var user = await this.userManager.FindByNameAsync(this.HttpContext.User.Identity.Name);
+
+            var successEdited = await this.eventService.Edit(id, model.Name,model.Location, model.Start, model.End,user.Id);
 
             if (!successEdited)
             {
@@ -99,7 +102,7 @@ namespace EventManager.Web.Controllers
             return RedirectToAction(nameof(EventsByUser));
         }
 
-       
+        [Authorize]
         public async Task<IActionResult> Remove(long id)
         {
             var eventItem = await this.eventService.FindById(id);
@@ -114,10 +117,12 @@ namespace EventManager.Web.Controllers
             return View(id);
         }
 
-       
+        [Authorize]
         public async Task<IActionResult> Delete(long id)
         {
-            var successRemoved = await this.eventService.Remove(id);
+            var user = await this.userManager.FindByNameAsync(this.HttpContext.User.Identity.Name);
+
+            var successRemoved = await this.eventService.Remove(id,user.Id);
 
             if (!successRemoved)
             {

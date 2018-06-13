@@ -50,7 +50,7 @@ namespace EventManager.Services
 
         }
 
-        public async Task<bool> Edit(long id, string name, string location, DateTime start, DateTime end)
+        public async Task<bool> Edit(long id, string name, string location, DateTime start, DateTime end,string userId)
         {
             if (!await this.EventExists(id))
             {
@@ -58,6 +58,11 @@ namespace EventManager.Services
             }
 
             var eventItem = await this.db.Events.Where(e => e.Id == id).FirstOrDefaultAsync();
+            if (eventItem.UserId!=userId)
+            {
+                return false;
+            }
+
             eventItem.Name = name;
             eventItem.Location = location;
             eventItem.Start = start;
@@ -80,7 +85,7 @@ namespace EventManager.Services
         public async Task<EventServiceUserModel> FindById(long id)
             => await this.db.Events.Where(e => e.Id == id).ProjectTo<EventServiceUserModel>().FirstOrDefaultAsync();
 
-        public async Task<bool> Remove(long id)
+        public async Task<bool> Remove(long id,string userId)
         {
             if (!await this.EventExists(id))
             {
@@ -88,6 +93,11 @@ namespace EventManager.Services
             }
 
             var eventToRemove = await this.db.Events.Where(e => e.Id == id).FirstOrDefaultAsync();
+
+            if (eventToRemove.UserId!=userId)
+            {
+                return false;
+            }
 
             this.db.Events.Remove(eventToRemove);
 
