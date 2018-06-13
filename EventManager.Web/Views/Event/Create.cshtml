@@ -1,0 +1,16 @@
+﻿@model EventFormModel
+
+@{
+    ViewData["Title"] = "Add an Event";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="post">
+    @await  Html.PartialAsync("_Create")
+   
+
+
+
+</form>
+

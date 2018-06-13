@@ -1,0 +1,15 @@
+﻿@model long
+
+@{
+    ViewData["Title"] = "Are you sure?";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3 class="alert alert-danger">This cannot be undone.</h3>
+
+<a class="btn btn-default" asp-controller="Event" asp-action="EventsByUser">Cancel</a>
+<a class="btn btn-danger" asp-controller="Event" asp-action="Delete" asp-route-id="@Model">Yes</a>
+
+
+

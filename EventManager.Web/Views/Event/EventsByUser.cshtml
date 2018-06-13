@@ -1,0 +1,72 @@
+﻿@model IEnumerable<EventServiceUserModel>
+
+@{
+    ViewData["Title"] = "Your Events";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Location
+            </th>
+
+            <th>
+                Start
+            </th>
+
+            <th>
+                End
+            </th>
+            <th>
+
+            </th>
+
+            <th>
+
+            </th>
+        </tr>
+
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+
+            <td>
+                @item.Location
+            </td>
+            <td>
+                @item.Start
+            </td>
+
+            <td>
+                @item.End
+            </td>
+
+            <td>
+                <a class="btn btn-warning" href="/event/edit/@item.Id">Edit</a>
+            </td>
+
+            <td>
+                <a class="btn btn-danger" href="/event/remove/@item.Id">Remove</a>
+            </td>
+        </tr>
+        }
+
+    </tbody>
+
+</table>
+
+

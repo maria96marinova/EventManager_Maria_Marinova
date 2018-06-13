@@ -1,0 +1,58 @@
+﻿@model IEnumerable<EventServiceBasicModel>
+@{
+    ViewData["Title"] = "Event Manager";
+}
+
+<h2>Events</h2>
+
+    
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+
+                <th>
+                    Location
+                </th>
+                <th>
+                    Start
+                </th>
+
+                <th>
+                    End
+                </th>
+            </tr>
+
+          
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    
+                    <td>
+                        @item.Location
+                    </td>
+
+                    <td>
+                        @item.Start
+                    </td>
+
+                    <td>
+                        @item.End
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+
